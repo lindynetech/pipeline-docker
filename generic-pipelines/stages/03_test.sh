@@ -4,7 +4,10 @@ echo
 echo "Testing Application"
 
 application_type=$(jq -r .application.type pipeline.json)
+test_enabled=$(jq -r .test.enabled pipeline.json)
 test_path=$(jq -r .test.path pipeline.json)
+
+if [ "$test_enabled" = 'true' ]; then
 
 case "${application_type}" in
   "java")
@@ -24,3 +27,5 @@ case "${application_type}" in
     exit 1
     ;;
 esac
+
+fi
